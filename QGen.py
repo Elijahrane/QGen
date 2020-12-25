@@ -8,14 +8,15 @@ import Qformats
 gi.require_version("Gtk","3.0")
 from gi.repository import Gtk
 class MainWindow(Gtk.Window):
-        box = Gtk.Box(orientation=1,spacing=6)
-        grid = Gtk.Grid()
-        availFormats = Qformats.Qformats
-        formatSelect = Gtk.ComboBoxText()
-        buttonComp = Gtk.Button(label="Compile")
-        for z in availFormats:
-            formatSelect.append_text(z)
+        
         def __init__(self):
+            self.box = Gtk.Box(orientation=1,spacing=6)
+            self.grid = Gtk.Grid()
+            self.availFormats = Qformats.Qformats
+            self.formatSelect = Gtk.ComboBoxText()
+            self.buttonComp = Gtk.Button(label="Compile")
+            for z in self.availFormats:
+                self.formatSelect.append_text(z)
             Gtk.Window.__init__(self, title="Reading Quiz Generator")
             self.add(self.box)
 
