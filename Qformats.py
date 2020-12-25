@@ -1,3 +1,9 @@
+class TeXfile:
+    def __init__(self, filename, terms, friendlyName):
+        self.filename = filename
+        self.friendlyName = friendlyName
+        self.replaceTerms = terms
+
 frTermsOEQ = {
         "\*title": "Title:",
         "\*pages": "Pages:",
@@ -16,15 +22,14 @@ frTermsOEQ = {
         "\*Qc": "Question 3:"
 }
 
-fr3TermDebug = {
-        "\*Test" : "Test:",
-        "\*Yay" : "Yay:"
+frTermsWOutline = {
+        "\*q1" : "Question 1:",
+        "\*q2" : "Question 2:",
+        "\*q3" : "Question 3:"
 }
 
 
+OEQuiz = TeXfile("oequiz.tex.bk", frTermsOEQ, "Reading Quiz, Ordinal + Questions")
+WOutline = TeXfile("writingoutline.tex.bk", frTermsWOutline, "Writing Outline")
 
-
-Qformats = {
-       "Reading Quiz, Ordinal + Questions" : frTermsOEQ,
-       "Debug" : fr3TermDebug
-}
+Qformats = [OEQuiz, WOutline]

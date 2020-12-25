@@ -8,15 +8,18 @@ import Qformats
 gi.require_version("Gtk","3.0")
 from gi.repository import Gtk
 class MainWindow(Gtk.Window):
-        
         def __init__(self):
             self.box = Gtk.Box(orientation=1,spacing=6)
             self.grid = Gtk.Grid()
             self.availFormats = Qformats.Qformats
             self.formatSelect = Gtk.ComboBoxText()
             self.buttonComp = Gtk.Button(label="Compile")
+            self.questionDict = {}  #This will be used to get the question : replace term pairs from formatSelect's text
+            self.filenameDict = {}  #This method kind of sucks but there isnt a good way to extract stuff other than the label from ComboBoxText
             for z in self.availFormats:
-                self.formatSelect.append_text(z)
+                self.formatSelect.append_text(z.friendlyName)
+                self.questionDict[z.friendlyName] = z.replaceTerms
+                self.filenameDict[z.friendlyName] = z.filename
             Gtk.Window.__init__(self, title="Reading Quiz Generator")
             self.add(self.box)
 
@@ -28,7 +31,7 @@ class MainWindow(Gtk.Window):
             self.buttonComp.connect("clicked", self.compilePDF)
         def populateGrid(self, selectedFormat):
             i = 0
-            valueBank = Qformats.Qformats[selectedFormat]
+            valueBank = self.questionDict[selectedFormat]
             prompts = valueBank.values()
             for value in prompts:
                 print(value)
@@ -49,14 +52,17 @@ class MainWindow(Gtk.Window):
             self.populateGrid(text)
 
         def compilePDF(self, widget):
-            copyfile("readingquiz.tex.bk", "readingquiz.tex")
-            filename ="readingquiz.tex"
+            filename = self.filenameDict[win.formatSelect.get_active_text()]
+            copyfile(filename, filename[:-3])
+            filename = filename[:-3]
 
             with open(filename, 'r+') as f:                    
                 text = f.read()
                 i = 0
-                keys =  Qformats.frTermsOEQ.keys()
+                terms = self.questionDict[win.formatSelect.get_active_text()]
+                keys = terms.keys()
                 for key in keys:
+                    print(key)
                     replacementCell = self.grid.get_child_at(1,i)
                     replacement = replacementCell.get_text()
                     text = re.sub(key, replacement, text)
@@ -65,9 +71,9 @@ class MainWindow(Gtk.Window):
                 f.write(text)
                 f.truncate()
                 f.close()
-            os.system('latexmk ./readingquiz.tex -pdf -quiet')
-            os.system('rm readingquiz.aux readingquiz.fls readingquiz.tex readingquiz.fdb_latexmk readingquiz.log')
-            os.system('xdg-open readingquiz.pdf')
+            os.system('latexmk ./' + filename + ' -pdf -quiet')
+            os.system('rm '+ filename[:-4] + '.aux '+ filename[:-4] + '.fls '+ filename[:-4] + '.tex '+ filename[:-4] + '.fdb_latexmk '+ filename[:-4] + '.log')
+            os.system('xdg-open '+ filename[:-4] + '.pdf')
 
 win = MainWindow()
 win.populateGrid(win.formatSelect.get_active_text())

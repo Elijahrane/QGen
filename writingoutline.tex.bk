@@ -1,0 +1,46 @@
+\documentclass[a4paper,11pt]{exam}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+\begin{document}
+\title{Essay Title}
+\maketitle
+
+\begin{tikzpicture}[remember picture, overlay]
+    \node[below left] (coin)  at (current page.north east)
+        {\begin{tabular}{l p{3cm}}
+ Name: & \hrule
+\end{tabular}
+        };
+\end{tikzpicture}
+
+\begin{questions}
+\question *q1 \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm}
+
+\question *q2 \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm}
+
+\question *q3 \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm} \\
+\rule{14cm}{0.20mm}
+
+\end{questions}
+
+\includegraphics{outline}
+
+\thispagestyle{empty}
+
+\end{document}
