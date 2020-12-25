@@ -1,0 +1,63 @@
+%Reading Class Template by Elijah Evanoff (elijahrane@gmail.com)
+%Creative Commons 3.0 - Attribution (c)2020
+\documentclass[a4paper,11pt]{exam}
+\usepackage{tikz}
+\begin{document}
+
+\title{*title \\
+\large Pages *pages}
+\date{\today{}}
+\maketitle{}
+\begin{tikzpicture}[remember picture, overlay]
+    \node[below left] (coin)  at (current page.north east)
+        {\begin{tabular}{l p{3cm}}
+ Name: & \hrule
+\end{tabular}
+        };
+\end{tikzpicture}
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering
+Number the events below in the order they occur in the book.}}}
+\end{center}
+
+%This template is desgned for about 10 options and 3 questions. You may need to mess with the \vspace lines a bit otherwise.
+\begin{checkboxes}
+ \choice *OEa
+ \choice *OEb
+ \choice *OEc
+ \choice *OEd
+ \choice *OEe
+ \choice *OEf
+ \choice *OEg
+ \choice *OEh
+ \choice *OEi
+ \choice *OEj 
+\end{checkboxes}
+
+\vspace{0.33in}
+
+\begin{questions}
+\question *Qa \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm}
+
+\question *Qb \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm}
+
+\question *Qc \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm} \\
+\rule{14cm}{0.12mm}
+
+\end{questions}
+\thispagestyle{empty}
+\end{document}
